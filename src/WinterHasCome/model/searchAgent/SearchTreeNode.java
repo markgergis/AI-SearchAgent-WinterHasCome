@@ -6,7 +6,7 @@ public class SearchTreeNode {
 
 	private State state;
     private SearchTreeNode parent;
-    private Object operator;
+    private Operator operator;
     private int pathCost;
     private int depth;
 
@@ -17,7 +17,7 @@ public class SearchTreeNode {
         this.depth = 0;
     }
 
-    public SearchTreeNode(State state, SearchTreeNode parent, Object operator, int stepCost) {
+    public SearchTreeNode(State state, SearchTreeNode parent, Operator operator, int stepCost) {
         this(state);
         this.parent = parent;
         this.operator = operator;
@@ -32,6 +32,7 @@ public class SearchTreeNode {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+	
     public State getState() {
         return state;
     }
@@ -48,7 +49,7 @@ public class SearchTreeNode {
         return pathCost;
     }
 
-    public boolean isRootNode() {
+	public boolean isRootNode() {
         return parent == null;
     }
 
