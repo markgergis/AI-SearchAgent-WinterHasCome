@@ -8,11 +8,12 @@ public class SaveWesteros extends SearchProblem {
 	public SaveWesteros() {
 		initialState = genGrid();
 		operators = new Operator[5];
-		operators[0] = new Attack(10);
+		operators[0] = new Attack(2);
 		operators[1] = new GoNorth(1);
 		operators[2] = new GoWest(1);
 		operators[3] = new GoSouth(1);
 		operators[4] = new GoEast(1);
+		
 	}
 
 	private static int getRandomNumberInRange(int min, int max) {
@@ -91,7 +92,8 @@ public class SaveWesteros extends SearchProblem {
 //		System.out.println(((WesterosState) state).getDragonStaone().x + " " + ((WesterosState) state).getDragonStaone().y);
 //		System.out.println(((WesterosState) state).getJonX() + " " + ((WesterosState) state).getJonY());
 //		return ((WesterosState) state).getDragonStaone().x == ((WesterosState) state).getJonX() && ((WesterosState) state).getDragonStaone().y == ((WesterosState) state).getJonY();
-		System.out.println("number of ww: "+ ((WesterosState) state).getEnemyCount());
+//		System.out.println("number of ww: "+ ((WesterosState) state).getEnemyCount());
+//		System.out.println(initialState.getEnemyCount());
 		return ((WesterosState) state).getEnemyCount() == 0;
 	}
 }

@@ -8,10 +8,15 @@ public class GoEast extends Operator {
 
 	@Override
 	public SearchTreeNode apply(SearchTreeNode node) {
-
 		WesterosState state = ((WesterosState) node.getState());
 		Cell rightCell = new Cell(state.getJonX() + 1, state.getJonY());
-
+		if(node.getParent() != null) {
+			WesterosState parentState = (WesterosState) node.getParent().getState();
+			Cell parentCell = new Cell(parentState.getJonX(), parentState.getJonY());
+			if(parentCell.equals(rightCell) &&!state.getDragonStaone().equals(new Cell(state.getJonX() - 1, state.getJonY()))) {
+				return null;
+			}
+		}
 		if (state.getJonX() < state.getWidth() - 1 && !state.getWhiteWalkers().contains(rightCell)
 				&& !state.getObstacles().contains(rightCell)) {
 

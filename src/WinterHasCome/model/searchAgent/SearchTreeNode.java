@@ -2,7 +2,7 @@ package WinterHasCome.model.searchAgent;
 
 import java.util.*;
 
-public class SearchTreeNode implements Comparable{
+public class SearchTreeNode implements Comparable<SearchTreeNode>{
 
 	private State state;
     private SearchTreeNode parent;
@@ -80,11 +80,20 @@ public class SearchTreeNode implements Comparable{
         return s;
     }
 
-	public int compareTo(Object object) {
+	@Override
+	public int compareTo(SearchTreeNode o) {
 		// TODO Auto-generated method stub
-		if(object instanceof SearchTreeNode) {
-			return this.pathCost - ((SearchTreeNode) object).getPathCost();
-		}
-		return 0;
+//		return this.pathCost - ((SearchTreeNode) o).getPathCost();
+		if(pathCost > o.pathCost){
+            return 1;
+        }
+
+        else if (pathCost < o.pathCost){
+            return -1;
+        }
+
+        else{
+            return 0;
+        }
 	}
 }

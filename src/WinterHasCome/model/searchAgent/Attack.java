@@ -20,34 +20,50 @@ public class Attack extends Operator {
 			int enemiesKilled = 0;
 			@SuppressWarnings("unchecked")
 			HashSet<Cell> newEnemySet = (HashSet<Cell>) state.getWhiteWalkers().clone();
+			CellType[][] grid = state.getGrid();
+			
 			if (state.getWhiteWalkers().contains(rightCell))
 				if (newEnemySet.remove(rightCell)) {
+					grid[rightCell.y][rightCell.x] = CellType.EMPTY;
 					enemiesKilled++;
 				}
 			if (state.getWhiteWalkers().contains(leftCell))
 				if (newEnemySet.remove(leftCell)) {
+					grid[leftCell.y][leftCell.x] = CellType.EMPTY;
 					enemiesKilled++;
 				}
 			if (state.getWhiteWalkers().contains(downCell))
 				if (newEnemySet.remove(downCell)) {
+					grid[downCell.y][downCell.x] = CellType.EMPTY;
 					enemiesKilled++;
 				}
 			if (state.getWhiteWalkers().contains(upCell))
 				if (newEnemySet.remove(upCell)) {
+					grid[upCell.y][upCell.x] = CellType.EMPTY;
 					enemiesKilled++;
 				}
 			if (enemiesKilled == 0) {
 				return null;
 			}
+//			System.out.println("up: "+ upCell);
+//			System.out.println("down: "+ downCell);
+//			System.out.println("left: "+ leftCell);
+//			System.out.println("right: "+ rightCell);
+//			for (int i = 0; i < grid.length; i++) {
+//				for (int j = 0; j < grid[i].length; j++) {
+//					System.out.print(grid[i][j]);
+//				}
+//				System.out.println();
+//			}System.out.println();
 			int carried = state.getDragonStoneCarried();
-			if (state.getDragonStaone().equals(new Cell(state.getJonX(), state.getJonY()))) {// Automatically pick up
-																								// dragonglass if on
+			if (state.getDragonStaone().equals(new Cell(state.getJonX(), state.getJonY()))) {
+				// Automatically pick up dragonglass if on
 				carried = state.getDragonStoneLimit();
 			} else {
 				carried--;
 			}
 
-			WesterosState newState = new WesterosState(state.getGrid(), state.getWidth(), state.getHeight(),
+			WesterosState newState = new WesterosState(grid, state.getWidth(), state.getHeight(),
 					state.getDragonStaone(), state.getObstacles(), newEnemySet, state.getDragonStoneLimit(), carried,
 					state.getJonX(), state.getJonY(), state.getEnemyCount() - enemiesKilled);
 

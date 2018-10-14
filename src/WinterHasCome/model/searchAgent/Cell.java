@@ -9,6 +9,12 @@ public class Cell implements Comparable<Cell> {
 		this.x = x;
 		this.y = y;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return x + " " + y;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

@@ -43,7 +43,11 @@ public class WesterosState extends State {
 	}
 	
 	public CellType[][] getGrid() {
-		return grid;
+		CellType[][] newgrid = new CellType[grid.length][grid[0].length];
+		for(int i=0; i<grid.length; i++)
+			  for(int j=0; j<grid[i].length; j++)
+			    newgrid[i][j]=grid[i][j];
+		return newgrid;
 	}
 
 	public int getWidth() {
