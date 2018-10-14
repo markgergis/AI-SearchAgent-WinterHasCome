@@ -74,9 +74,6 @@ public class WesterosState extends State {
 		return dragonStoneCarried;
 	}
 	
-	public void setDragonStoneCarried(int c) {
-		this.dragonStoneCarried = c;
-	}
 
 	public int getJonX() {
 		return jonX;

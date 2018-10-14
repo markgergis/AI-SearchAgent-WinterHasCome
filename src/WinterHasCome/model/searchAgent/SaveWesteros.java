@@ -27,8 +27,8 @@ public class SaveWesteros extends SearchProblem {
 
 	public WesterosState genGrid() {
 		Random rand = new Random();
-		int m = getRandomNumberInRange(4, 6); // this is y = column
-		int n = getRandomNumberInRange(4, 6); // this is x = row
+		int m = getRandomNumberInRange(4, 5); // this is y = column
+		int n = getRandomNumberInRange(4, 5); // this is x = row
 		CellType[][] grid = new CellType[m][n];
 		int dc = rand.nextInt(m * n / 4);
 		int wwc = dc;
@@ -83,7 +83,7 @@ public class SaveWesteros extends SearchProblem {
 
 	public static void main(String[] args) {
 			SaveWesteros s = new SaveWesteros();
-			s.search(new BreadthFirstSearch());
+			s.search(new UniformCostSearch());
 	}
 
 	@Override

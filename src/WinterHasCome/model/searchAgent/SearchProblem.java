@@ -14,7 +14,7 @@ public abstract class SearchProblem {
 		queuingFunc.add(new SearchTreeNode(initialState));
 		int i =0;
 		while (true) {
-//			System.out.println(i++);
+			System.out.println(i++);
 			if (queuingFunc.isEmpty()) {
 				System.out.println("YOU KNOW NOTHING JON SNOW");
 				return null;

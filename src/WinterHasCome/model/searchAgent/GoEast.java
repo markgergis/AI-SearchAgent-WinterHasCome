@@ -1,7 +1,5 @@
 package WinterHasCome.model.searchAgent;
 
-import java.util.HashSet;
-
 public class GoEast extends Operator {
 
 	public GoEast(int cost) {
@@ -22,10 +20,9 @@ public class GoEast extends Operator {
 				carried = state.getDragonStoneLimit();
 			}
 
-			@SuppressWarnings("unchecked")
 			WesterosState newState = new WesterosState(state.getGrid(), state.getWidth(), state.getHeight(),
-					state.getDragonStaone(), state.getObstacles(), (HashSet<Cell>) state.getWhiteWalkers().clone(),
-					state.getDragonStoneLimit(), carried, state.getJonX() + 1, state.getJonY(), state.getEnemyCount());
+					state.getDragonStaone(), state.getObstacles(), state.getWhiteWalkers(), state.getDragonStoneLimit(),
+					carried, state.getJonX() + 1, state.getJonY(), state.getEnemyCount());
 
 			return new SearchTreeNode(newState, node, this, this.getCost());
 		}

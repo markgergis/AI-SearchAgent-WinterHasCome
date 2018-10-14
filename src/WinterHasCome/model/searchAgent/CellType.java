@@ -1,22 +1,25 @@
 package WinterHasCome.model.searchAgent;
 
 public enum CellType {
-	EMPTY, WHITEWALKER, OBSTACLE, DRAGONSTONE;
-	
-	public String toString() {
-		if (this == EMPTY) {
+	EMPTY {
+		public String toString() {
 			return ("[ ]");
-		} 
-		if (this == WHITEWALKER) {
+		}
+	},
+	WHITEWALKER {
+		public String toString() {
 			return ("[W]");
 		}
-		if (this == OBSTACLE) {
+	},
+	OBSTACLE {
+		public String toString() {
 			return ("[X]");
 		}
-		if (this == DRAGONSTONE) {
+	},
+	DRAGONSTONE {
+		public String toString() {
 			return ("[D]");
 		}
-		return "";
-		
 	}
+
 }
