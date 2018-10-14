@@ -84,7 +84,7 @@ public class SaveWesteros extends SearchProblem {
 
 	public static void main(String[] args) {
 			SaveWesteros s = new SaveWesteros();
-			s.search(new UniformCostSearch());
+			s.search(new IterativeDeepeningSearch((Integer.MAX_VALUE),s.initialState));
 	}
 
 	@Override

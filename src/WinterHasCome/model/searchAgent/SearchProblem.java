@@ -23,7 +23,11 @@ public abstract class SearchProblem {
 				return null;
 			}
 			SearchTreeNode node = queuingFunc.remove();
-			
+			if(node == null) {
+				System.out.println(i);
+				System.out.println("YOU KNOW NOTHING JON SNOW");
+				return null;
+			}
 //			System.out.println("DragonStoneCarried: " + ((WesterosState) node.getState()).getDragonStoneCarried());
 			if (goalTest(node.getState())) {
 				System.out.println(i);
