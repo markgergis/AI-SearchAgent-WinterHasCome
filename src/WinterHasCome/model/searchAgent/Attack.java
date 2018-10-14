@@ -16,33 +16,38 @@ public class Attack extends Operator {
 		Cell downCell = new Cell(state.getJonX(), state.getJonY() + 1);
 		Cell upCell = new Cell(state.getJonX(), state.getJonY() - 1);
 
-		if (state.getDragonStoneCarried() > 0 && state.getWhiteWalkers().contains(rightCell)
-				&& state.getWhiteWalkers().contains(leftCell) && state.getWhiteWalkers().contains(downCell)
-				&& state.getWhiteWalkers().contains(upCell)) {
+		if (state.getDragonStoneCarried() > 0 ) {
 			int enemiesKilled = 0;
 			@SuppressWarnings("unchecked")
 			HashSet<Cell> newEnemySet = (HashSet<Cell>) state.getWhiteWalkers().clone();
-			if (newEnemySet.remove(rightCell)) {
-				enemiesKilled++;
-			}
-			if (newEnemySet.remove(leftCell)) {
-				enemiesKilled++;
-			}
+			if(state.getWhiteWalkers().contains(rightCell))
+				if (newEnemySet.remove(rightCell)) {
+					enemiesKilled++;
+				}
+			if(state.getWhiteWalkers().contains(leftCell))
+				if (newEnemySet.remove(leftCell)) {
+					enemiesKilled++;
+				}
+			if(state.getWhiteWalkers().contains(downCell))
 			if (newEnemySet.remove(downCell)) {
 				enemiesKilled++;
 			}
+			if(state.getWhiteWalkers().contains(upCell))
 			if (newEnemySet.remove(upCell)) {
 				enemiesKilled++;
 			}
-			int carried = state.getDragonStoneCarried();
-			if (state.getDragonStaone().equals(new Cell(state.getJonX(), state.getJonY()))) {// Automatically pick up
-																								// dragonglass if on
-																								// dragonstone cell
-				carried = state.getDragonStoneLimit();
+			if(enemiesKilled == 0) {
+				return null;
 			}
+//			int carried = state.getDragonStoneCarried();
+//			if (state.getDragonStaone().equals(new Cell(state.getJonX(), state.getJonY()))) {// Automatically pick up
+//																								// dragonglass if on
+//																								// dragonstone cell
+//				state.setDragonStoneCarried(state.getDragonStoneLimit());
+//			}
 
 			WesterosState newState = new WesterosState(state.getGrid(), state.getWidth(), state.getHeight(),
-					state.getDragonStaone(), state.getObstacles(), newEnemySet, state.getDragonStoneLimit(), carried,
+					state.getDragonStaone(), state.getObstacles(), newEnemySet, state.getDragonStoneLimit(), state.getDragonStoneCarried() - 1,
 					state.getJonX(), state.getJonY(), state.getEnemyCount() - enemiesKilled);
 
 			return new SearchTreeNode(newState, node, this, this.getCost());

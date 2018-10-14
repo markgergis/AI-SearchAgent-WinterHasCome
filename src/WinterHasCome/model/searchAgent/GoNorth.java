@@ -31,5 +31,7 @@ public class GoNorth extends Operator {
 		}
 		return null;
 	}
+	
+
 
 }
