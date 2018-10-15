@@ -17,6 +17,7 @@ public class Attack extends Operator {
 		Cell upCell = new Cell(state.getJonX(), state.getJonY() - 1);
 
 		if (state.getDragonStoneCarried() > 0) {
+
 			int enemiesKilled = 0;
 			@SuppressWarnings("unchecked")
 			HashSet<Cell> newEnemySet = (HashSet<Cell>) state.getWhiteWalkers().clone();
@@ -45,16 +46,16 @@ public class Attack extends Operator {
 			if (enemiesKilled == 0) {
 				return null;
 			}
-//			System.out.println("up: "+ upCell);
-//			System.out.println("down: "+ downCell);
-//			System.out.println("left: "+ leftCell);
-//			System.out.println("right: "+ rightCell);
+//			System.out.println();
 //			for (int i = 0; i < grid.length; i++) {
 //				for (int j = 0; j < grid[i].length; j++) {
+//					if(state.getJonX() == j && state.getJonY() == i) {
+//						System.out.print("[J]");
+//					} else
 //					System.out.print(grid[i][j]);
 //				}
 //				System.out.println();
-//			}System.out.println();
+//			}
 			int carried = state.getDragonStoneCarried();
 			if (state.getDragonStaone().equals(new Cell(state.getJonX(), state.getJonY()))) {
 				// Automatically pick up dragonglass if on

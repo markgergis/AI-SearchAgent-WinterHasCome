@@ -8,7 +8,7 @@ public class SaveWesteros extends SearchProblem {
 	public SaveWesteros() {
 		initialState = genGrid();
 		operators = new Operator[5];
-		operators[0] = new Attack(2);
+		operators[0] = new Attack(30);
 		operators[1] = new GoNorth(1);
 		operators[2] = new GoWest(1);
 		operators[3] = new GoSouth(1);
@@ -28,8 +28,8 @@ public class SaveWesteros extends SearchProblem {
 
 	public WesterosState genGrid() {
 		Random rand = new Random();
-		int m = getRandomNumberInRange(4, 5); // this is y = column
-		int n = getRandomNumberInRange(4, 5); // this is x = row
+		int m = 7; // this is y = column
+		int n = 7; // this is x = row
 		CellType[][] grid = new CellType[m][n];
 		int dc = rand.nextInt(m * n / 4);
 		int wwc = dc;
@@ -84,7 +84,7 @@ public class SaveWesteros extends SearchProblem {
 
 	public static void main(String[] args) {
 			SaveWesteros s = new SaveWesteros();
-			s.search(new IterativeDeepeningSearch((Integer.MAX_VALUE),s.initialState));
+			s.search(new AStarSearch(2));
 	}
 
 	@Override

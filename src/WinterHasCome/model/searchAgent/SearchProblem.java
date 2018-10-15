@@ -22,6 +22,7 @@ public abstract class SearchProblem {
 				System.out.println("YOU KNOW NOTHING JON SNOW");
 				return null;
 			}
+			
 			SearchTreeNode node = queuingFunc.remove();
 			if(node == null) {
 				System.out.println(i);
