@@ -14,7 +14,7 @@ public class GoNorth extends Operator {
 		if(node.getParent() != null) {
 			WesterosState parentState = (WesterosState) node.getParent().getState();
 			Cell parentCell = new Cell(parentState.getJonX(), parentState.getJonY());
-			if(parentCell.equals(upCell) &&!state.getDragonStaone().equals(new Cell(state.getJonX() - 1, state.getJonY()))) {
+			if(parentCell.equals(upCell) &&!state.getDragonStone().equals(new Cell(state.getJonX() - 1, state.getJonY()))) {
 				return null;
 			}
 		}
@@ -24,12 +24,12 @@ public class GoNorth extends Operator {
 				&& !state.getObstacles().contains(upCell)) {
 
 			int carried = state.getDragonStoneCarried();
-			if (state.getDragonStaone().equals(upCell)) {// Automatically pick up dragonglass if on dragonstone cell
+			if (state.getDragonStone().equals(upCell)) {// Automatically pick up dragonglass if on dragonstone cell
 				carried = state.getDragonStoneLimit();
 			}
 
 			WesterosState newState = new WesterosState(state.getGrid(), state.getWidth(), state.getHeight(),
-					state.getDragonStaone(), state.getObstacles(), state.getWhiteWalkers(), state.getDragonStoneLimit(),
+					state.getDragonStone(), state.getObstacles(), state.getWhiteWalkers(), state.getDragonStoneLimit(),
 					carried, state.getJonX(), state.getJonY() - 1, state.getEnemyCount());
 
 			return new SearchTreeNode(newState, node, this, this.getCost());

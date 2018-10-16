@@ -8,7 +8,7 @@ public class SaveWesteros extends SearchProblem {
 	public SaveWesteros() {
 		initialState = genGrid();
 		operators = new Operator[5];
-		operators[0] = new Attack(2);
+		operators[0] = new Attack( 3 * (initialState.getWidth() + initialState.getHeight()));
 		operators[1] = new GoNorth(1);
 		operators[2] = new GoWest(1);
 		operators[3] = new GoSouth(1);
