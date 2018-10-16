@@ -15,8 +15,8 @@ public class AStarSearch extends QueueingFunction {
 			public int compare(SearchTreeNode o1, SearchTreeNode o2) {
 				WesterosState node1S = (WesterosState)o1.getState();
 				WesterosState node2S = (WesterosState)o2.getState();
-				int distance_a = heuristicFunc(node1S.getJonX(),node1S.getJonY(), node1S.getEnemyCount(), node1S.getWhiteWalkers(), node1S.getDragonStone(), node1S.getDragonStoneCarried()) + o1.getPathCost();
-		        int distance_b = heuristicFunc(node2S.getJonX(),node2S.getJonY(), node2S.getEnemyCount(), node2S.getWhiteWalkers(), node2S.getDragonStone(), node2S.getDragonStoneCarried()) + o2.getPathCost();
+				int distance_a = o1.getPathCost() + heuristicFunc(node1S.getJonX(),node1S.getJonY(), node1S.getEnemyCount(), node1S.getWhiteWalkers(), node1S.getDragonStone(), node1S.getDragonStoneCarried()) + o1.getPathCost();
+		        int distance_b = o2.getPathCost() + heuristicFunc(node2S.getJonX(),node2S.getJonY(), node2S.getEnemyCount(), node2S.getWhiteWalkers(), node2S.getDragonStone(), node2S.getDragonStoneCarried()) + o2.getPathCost();
 //		        System.out.println(distance_a+ " "+distance_b);
 		        // Greedy Heuristic: f(n) = g(n)
 		        if ( distance_a > distance_b ) return 1;
