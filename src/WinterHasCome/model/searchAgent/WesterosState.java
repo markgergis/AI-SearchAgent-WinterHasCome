@@ -1,6 +1,5 @@
 package WinterHasCome.model.searchAgent;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class WesterosState extends State {
@@ -8,7 +7,7 @@ public class WesterosState extends State {
 	private CellType[][] grid;
 	private int width;
 	private int height;
-	private Cell dragonStaone;
+	private Cell dragonStone;
 	private HashSet<Cell> obstacles;
 	private HashSet<Cell> whiteWalkers;
 	private int dragonStoneLimit;
@@ -24,7 +23,7 @@ public class WesterosState extends State {
 		this.grid = grid;
 		this.width = width;
 		this.height = height;
-		this.dragonStaone = dragonStone;
+		this.dragonStone = dragonStone;
 		this.obstacles = obstacles;
 		this.whiteWalkers = whiteWalkers;
 		this.dragonStoneLimit = dragonStoneLimit;
@@ -33,15 +32,38 @@ public class WesterosState extends State {
 		this.jonY = jonY;
 		this.enemyCount = enemyCount;
 	}
-	
+
 	public String printGrid() {
 		String ret = "";
 		for (int i = 0; i < grid.length; i++) {
-			ret += Arrays.toString(grid) + "\n";
+			for (int j = 0; j < grid[i].length; j++) {
+				if (i == jonY && j == jonX) {
+					ret += "[J]";
+				} else {
+					if (grid[i][j] == CellType.WHITEWALKER) {
+						if (whiteWalkers.contains(new Cell(j, i))) {
+							ret += grid[i][j];
+						} else {
+							ret += CellType.EMPTY;
+						}
+					} else {
+						ret += grid[i][j];
+					}
+				}
+			}
+			ret += "\n";
 		}
 		return ret;
 	}
-	
+
+	public CellType[][] cloneGrid() {
+		CellType[][] newgrid = new CellType[grid.length][grid[0].length];
+		for (int i = 0; i < grid.length; i++)
+			for (int j = 0; j < grid[i].length; j++)
+				newgrid[i][j] = grid[i][j];
+		return newgrid;
+	}
+
 	public CellType[][] getGrid() {
 		return grid;
 	}
@@ -54,8 +76,8 @@ public class WesterosState extends State {
 		return height;
 	}
 
-	public Cell getDragonStaone() {
-		return dragonStaone;
+	public Cell getDragonStone() {
+		return dragonStone;
 	}
 
 	public HashSet<Cell> getObstacles() {

@@ -16,9 +16,7 @@ public class Attack extends Operator {
 		Cell downCell = new Cell(state.getJonX(), state.getJonY() + 1);
 		Cell upCell = new Cell(state.getJonX(), state.getJonY() - 1);
 
-		if (state.getDragonStoneCarried() > 0 && state.getWhiteWalkers().contains(rightCell)
-				&& state.getWhiteWalkers().contains(leftCell) && state.getWhiteWalkers().contains(downCell)
-				&& state.getWhiteWalkers().contains(upCell)) {
+		if (state.getDragonStoneCarried() > 0) {
 			int enemiesKilled = 0;
 			@SuppressWarnings("unchecked")
 			HashSet<Cell> newEnemySet = (HashSet<Cell>) state.getWhiteWalkers().clone();
@@ -34,15 +32,21 @@ public class Attack extends Operator {
 			if (newEnemySet.remove(upCell)) {
 				enemiesKilled++;
 			}
+			if (enemiesKilled == 0) {
+				return null;
+			}
+
+
 			int carried = state.getDragonStoneCarried();
-			if (state.getDragonStaone().equals(new Cell(state.getJonX(), state.getJonY()))) {// Automatically pick up
-																								// dragonglass if on
-																								// dragonstone cell
+			if (state.getDragonStone().equals(new Cell(state.getJonX(), state.getJonY()))) {
+				// Automatically pick up dragonglass if on dragonstone cell
 				carried = state.getDragonStoneLimit();
+			} else {
+				carried--;
 			}
 
 			WesterosState newState = new WesterosState(state.getGrid(), state.getWidth(), state.getHeight(),
-					state.getDragonStaone(), state.getObstacles(), newEnemySet, state.getDragonStoneLimit(), carried,
+					state.getDragonStone(), state.getObstacles(), newEnemySet, state.getDragonStoneLimit(), carried,
 					state.getJonX(), state.getJonY(), state.getEnemyCount() - enemiesKilled);
 
 			return new SearchTreeNode(newState, node, this, this.getCost());
