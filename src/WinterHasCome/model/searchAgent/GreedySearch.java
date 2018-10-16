@@ -15,8 +15,8 @@ public class GreedySearch extends QueueingFunction {
 			public int compare(SearchTreeNode o1, SearchTreeNode o2) {
 				WesterosState node1S = (WesterosState)o1.getState();
 				WesterosState node2S = (WesterosState)o2.getState();
-				int distance_a = heuristicFunc(node1S.getJonX(),node1S.getJonY(), node1S.getEnemyCount(), node1S.getWhiteWalkers(), node1S.getDragonStaone(), node1S.getDragonStoneCarried());
-		        int distance_b = heuristicFunc(node2S.getJonX(),node2S.getJonY(), node2S.getEnemyCount(), node2S.getWhiteWalkers(), node2S.getDragonStaone(), node2S.getDragonStoneCarried());
+				int distance_a = heuristicFunc(node1S.getJonX(),node1S.getJonY(), node1S.getEnemyCount(), node1S.getWhiteWalkers(), node1S.getDragonStone(), node1S.getDragonStoneCarried());
+		        int distance_b = heuristicFunc(node2S.getJonX(),node2S.getJonY(), node2S.getEnemyCount(), node2S.getWhiteWalkers(), node2S.getDragonStone(), node2S.getDragonStoneCarried());
 //		        System.out.println(distance_a+ " "+distance_b);
 		        // Greedy Heuristic: f(n) = g(n)
 		        if ( distance_a > distance_b ) return 1;

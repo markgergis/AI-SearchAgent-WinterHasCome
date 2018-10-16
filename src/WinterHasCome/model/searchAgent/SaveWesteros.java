@@ -8,7 +8,9 @@ public class SaveWesteros extends SearchProblem {
 	public SaveWesteros() {
 		initialState = genGrid();
 		operators = new Operator[5];
-		operators[0] = new Attack(30);
+
+//		operators[0] = new Attack( 3 * (initialState.getWidth() + initialState.getHeight()));
+		operators[0] = new Attack(20);
 		operators[1] = new GoNorth(1);
 		operators[2] = new GoWest(1);
 		operators[3] = new GoSouth(1);
@@ -31,9 +33,9 @@ public class SaveWesteros extends SearchProblem {
 		int m = 7; // this is y = column
 		int n = 7; // this is x = row
 		CellType[][] grid = new CellType[m][n];
-		int dc = rand.nextInt(m * n / 4);
+		int dc = getRandomNumberInRange(m * n / 10, m * n / 4);
 		int wwc = dc;
-		int oc = rand.nextInt(m * n / 5);
+		int oc = getRandomNumberInRange(m * n / 10, m * n / 4);
 		HashSet<Cell> obstacles = new HashSet<Cell>(oc);
 		int dragonStoneLimit = rand.nextInt(m * n);
 		int x;
