@@ -63,6 +63,10 @@ public class WesterosState extends State {
 				newgrid[i][j] = grid[i][j];
 		return newgrid;
 	}
+	
+//	public CellType[][] getGrid() {
+//		return grid;
+//	}
 
 	public CellType[][] getGrid() {
 		return grid;

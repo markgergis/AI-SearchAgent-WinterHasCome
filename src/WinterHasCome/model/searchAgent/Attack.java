@@ -17,6 +17,7 @@ public class Attack extends Operator {
 		Cell upCell = new Cell(state.getJonX(), state.getJonY() - 1);
 
 		if (state.getDragonStoneCarried() > 0) {
+
 			int enemiesKilled = 0;
 			@SuppressWarnings("unchecked")
 			HashSet<Cell> newEnemySet = (HashSet<Cell>) state.getWhiteWalkers().clone();
@@ -35,7 +36,6 @@ public class Attack extends Operator {
 			if (enemiesKilled == 0) {
 				return null;
 			}
-
 
 			int carried = state.getDragonStoneCarried();
 			if (state.getDragonStone().equals(new Cell(state.getJonX(), state.getJonY()))) {
