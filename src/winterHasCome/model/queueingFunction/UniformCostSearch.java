@@ -1,7 +1,9 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.queueingFunction;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
+
+import winterHasCome.model.searchTreeNode.SearchTreeNode;
 
 public class UniformCostSearch extends QueueingFunction {
 

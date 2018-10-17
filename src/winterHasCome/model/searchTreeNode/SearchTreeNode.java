@@ -1,6 +1,9 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.searchTreeNode;
 
 import java.util.*;
+
+import winterHasCome.model.operator.Operator;
+import winterHasCome.model.state.State;
 
 public class SearchTreeNode{
 

@@ -1,4 +1,6 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.operator;
+
+import winterHasCome.model.searchTreeNode.SearchTreeNode;
 
 public abstract class Operator {
 

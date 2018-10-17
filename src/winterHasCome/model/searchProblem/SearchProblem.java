@@ -1,8 +1,14 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.searchProblem;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import winterHasCome.model.operator.Operator;
+import winterHasCome.model.queueingFunction.QueueingFunction;
+import winterHasCome.model.searchTreeNode.SearchTreeNode;
+import winterHasCome.model.state.State;
+import winterHasCome.model.state.WesterosState;
 
 public abstract class SearchProblem {
 

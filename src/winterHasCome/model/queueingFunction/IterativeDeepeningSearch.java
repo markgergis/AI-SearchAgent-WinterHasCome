@@ -1,6 +1,9 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.queueingFunction;
 
 import java.util.Stack;
+
+import winterHasCome.model.searchTreeNode.SearchTreeNode;
+import winterHasCome.model.state.WesterosState;
 
 public class IterativeDeepeningSearch extends QueueingFunction {
 

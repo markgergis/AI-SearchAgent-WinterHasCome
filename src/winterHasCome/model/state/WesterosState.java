@@ -1,6 +1,9 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.state;
 
 import java.util.HashSet;
+
+import winterHasCome.model.cell.Cell;
+import winterHasCome.model.cell.CellType;
 
 public class WesterosState extends State {
 

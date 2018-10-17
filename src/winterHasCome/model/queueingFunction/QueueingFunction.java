@@ -1,6 +1,8 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.queueingFunction;
 
 import java.util.Collection;
+
+import winterHasCome.model.searchTreeNode.SearchTreeNode;
 
 public abstract class QueueingFunction{
 	

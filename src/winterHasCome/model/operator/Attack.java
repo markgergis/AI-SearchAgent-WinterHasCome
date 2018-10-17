@@ -1,6 +1,10 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.operator;
 
 import java.util.HashSet;
+
+import winterHasCome.model.cell.Cell;
+import winterHasCome.model.searchTreeNode.SearchTreeNode;
+import winterHasCome.model.state.WesterosState;
 
 public class Attack extends Operator {
 
