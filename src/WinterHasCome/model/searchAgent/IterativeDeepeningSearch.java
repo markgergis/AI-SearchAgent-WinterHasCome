@@ -24,28 +24,26 @@ public class IterativeDeepeningSearch extends QueueingFunction {
 
 	@Override
 	public void add(SearchTreeNode s) {
-		((Stack<SearchTreeNode>) queue).push(s);		
+		if(depth >= (s.getDepth())) {
+			((Stack<SearchTreeNode>) queue).push(s);
+		}
 		
 	}
 
 	@Override
-	public SearchTreeNode remove() {
-		System.out.println(((Stack<SearchTreeNode>) queue).peek().getDepth());
-		if(depth >= ((Stack<SearchTreeNode>) queue).peek().getDepth()) {
-			return ((Stack<SearchTreeNode>) queue).pop();
-		}
-		depth++;
-		if(depth<=max) {
-			super.queue = new Stack<SearchTreeNode>();
-			add(new SearchTreeNode(initialState));
-			return ((Stack<SearchTreeNode>) queue).pop();
-		}
-			
-		return null;
+	public SearchTreeNode remove() {	
+		return ((Stack<SearchTreeNode>) queue).pop();
 	}
 
 	@Override
 	public boolean isEmpty() {
+		if(((Stack<SearchTreeNode>) queue).empty()) {
+			depth++;
+			if(depth<=max) {
+				super.queue = new Stack<SearchTreeNode>();
+				add(new SearchTreeNode(initialState)); 
+			}
+		}
 		return ((Stack<SearchTreeNode>) queue).empty();
 	}
 }
