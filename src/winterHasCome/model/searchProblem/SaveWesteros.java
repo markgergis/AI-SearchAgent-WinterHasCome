@@ -38,21 +38,22 @@ public class SaveWesteros extends SearchProblem {
 		operators = new Operator[5];
 
 		operators[0] = new Attack(
-				(((WesterosState) initialState).getWidth() * ((WesterosState) initialState).getHeight()));
+				(((WesterosState) initialState).getWidth() * ((WesterosState) initialState).getHeight()),
+				this::pathCost);
 //		operators[0] = new Attack(
-//				3 * (((WesterosState) initialState).getWidth() + ((WesterosState) initialState).getHeight()));
-//		operators[0] = new Attack(8);
-		operators[1] = new GoNorth(1);
-		operators[2] = new GoWest(1);
-		operators[3] = new GoSouth(1);
-		operators[4] = new GoEast(1);
+//				3 * (((WesterosState) initialState).getWidth() + ((WesterosState) initialState).getHeight()), this::pathCost);
+//		operators[0] = new Attack(8, this::pathCost);
+		operators[1] = new GoNorth(1, this::pathCost);
+		operators[2] = new GoWest(1, this::pathCost);
+		operators[3] = new GoSouth(1, this::pathCost);
+		operators[4] = new GoEast(1, this::pathCost);
 	}
 
 	@Override
 	public boolean goalTest(State state) {
 		return ((WesterosState) state).getEnemyCount() == 0;
 	}
-	
+
 	@Override
 	public int pathCost(SearchTreeNode node, Operator operator) {
 		return node.getPathCost() + operator.getCost();

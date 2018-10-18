@@ -1,13 +1,15 @@
 package winterHasCome.model.operator;
 
+import java.util.function.BiFunction;
+
 import winterHasCome.model.cell.Cell;
 import winterHasCome.model.searchTreeNode.SearchTreeNode;
 import winterHasCome.model.state.WesterosState;
 
 public class GoWest extends Operator {
 
-	public GoWest(int cost) {
-		super(cost, "Go West");
+	public GoWest(int cost, BiFunction<SearchTreeNode, Operator, Integer> pathCostFunc) {
+		super(cost, "Go West", pathCostFunc);
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class GoWest extends Operator {
 					state.getDragonStone(), state.getObstacles(), state.getWhiteWalkers(), state.getDragonStoneLimit(),
 					carried, state.getJonX() - 1, state.getJonY(), state.getEnemyCount());
 
-			return new SearchTreeNode(newState, node, this, this.getCost());
+			return new SearchTreeNode(newState, node, this);
 		}
 		return null;
 	}

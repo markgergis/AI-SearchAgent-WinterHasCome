@@ -19,6 +19,14 @@ public class SearchTreeNode{
         this.pathCost = 0;
         this.depth = 0;
     }
+	
+	 public SearchTreeNode(State state, SearchTreeNode parent, Operator operator) {
+	        this(state);
+	        this.parent = parent;
+	        this.operator = operator;
+	        this.pathCost = operator.getPathCostFunc().apply(parent,operator);
+	        this.depth = parent.depth + 1;
+	    }
 
     public SearchTreeNode(State state, SearchTreeNode parent, Operator operator, int stepCost) {
         this(state);
