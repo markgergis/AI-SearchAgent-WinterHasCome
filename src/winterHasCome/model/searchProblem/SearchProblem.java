@@ -14,6 +14,7 @@ public abstract class SearchProblem {
 	public State initialState;
 
 	public abstract boolean goalTest(State state);
+	public abstract int pathCost(SearchTreeNode node, Operator operator);
 
 	public SearchTreeNode search(QueuingFunction queuingFunc) {
 		queuingFunc.add(new SearchTreeNode(initialState));

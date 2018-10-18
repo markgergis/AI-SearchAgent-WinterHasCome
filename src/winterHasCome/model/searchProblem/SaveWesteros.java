@@ -52,6 +52,11 @@ public class SaveWesteros extends SearchProblem {
 	public boolean goalTest(State state) {
 		return ((WesterosState) state).getEnemyCount() == 0;
 	}
+	
+	@Override
+	public int pathCost(SearchTreeNode node, Operator operator) {
+		return node.getPathCost() + operator.getCost();
+	}
 
 	/* Generating Grid */
 
