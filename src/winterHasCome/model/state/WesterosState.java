@@ -1,6 +1,9 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.state;
 
 import java.util.HashSet;
+
+import winterHasCome.model.cell.Cell;
+import winterHasCome.model.cell.CellType;
 
 public class WesterosState extends State {
 
@@ -63,10 +66,6 @@ public class WesterosState extends State {
 				newgrid[i][j] = grid[i][j];
 		return newgrid;
 	}
-	
-//	public CellType[][] getGrid() {
-//		return grid;
-//	}
 
 	public CellType[][] getGrid() {
 		return grid;

@@ -1,19 +1,23 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.queuingFunction;
 
 import java.util.Stack;
 
-public class IterativeDeepeningSearch extends QueueingFunction {
+import winterHasCome.model.searchTreeNode.SearchTreeNode;
+import winterHasCome.model.state.State;
+
+public class IterativeDeepeningSearch extends QueuingFunction {
 
 	private int depth;
 	private int max;
-	WesterosState initialState;
-	
-	public IterativeDeepeningSearch(int max, WesterosState initialState) {
+	State initialState;
+
+	public IterativeDeepeningSearch(int max, State initialState) {
 		super.queue = new Stack<SearchTreeNode>();
 		depth = 0;
 		this.max = max;
 		this.initialState = initialState;
 	}
+
 	public int getDepth() {
 		return depth;
 	}
@@ -24,24 +28,24 @@ public class IterativeDeepeningSearch extends QueueingFunction {
 
 	@Override
 	public void add(SearchTreeNode s) {
-		if(depth >= (s.getDepth())) {
+		if (depth >= (s.getDepth())) {
 			((Stack<SearchTreeNode>) queue).push(s);
 		}
-		
+
 	}
 
 	@Override
-	public SearchTreeNode remove() {	
+	public SearchTreeNode remove() {
 		return ((Stack<SearchTreeNode>) queue).pop();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		if(((Stack<SearchTreeNode>) queue).empty()) {
+		if (((Stack<SearchTreeNode>) queue).empty()) {
 			depth++;
-			if(depth<=max) {
+			if (depth <= max) {
 				super.queue = new Stack<SearchTreeNode>();
-				add(new SearchTreeNode(initialState)); 
+				add(new SearchTreeNode(initialState));
 			}
 		}
 		return ((Stack<SearchTreeNode>) queue).empty();

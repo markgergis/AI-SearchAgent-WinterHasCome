@@ -1,4 +1,4 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.cell;
 
 public enum CellType {
 	EMPTY {

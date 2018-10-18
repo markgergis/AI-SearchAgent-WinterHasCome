@@ -1,6 +1,9 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.searchTreeNode;
 
 import java.util.*;
+
+import winterHasCome.model.operator.Operator;
+import winterHasCome.model.state.State;
 
 public class SearchTreeNode{
 
@@ -41,7 +44,7 @@ public class SearchTreeNode{
         return parent;
     }
 
-    public Object getAction() {
+    public Object getOperator() {
         return operator;
     }
 
@@ -66,7 +69,7 @@ public class SearchTreeNode{
     }
 
     public String toString() {
-        return "[parent=" + parent + ", action=" + operator + ", state="
+        return "[parent=" + parent + ", operator=" + operator + ", state="
                 + getState() + ", pathCost=" + pathCost + "]";
     }
 
@@ -74,8 +77,8 @@ public class SearchTreeNode{
         String s = "";
         List<SearchTreeNode> nodes = getPathFromRoot();
         for (int i = 0; i < nodes.size(); i++) {
-            System.out.println("Action : " + nodes.get(i).getAction());
-            System.out.println("State  : " + nodes.get(i).getState());
+            System.out.println("Operator : " + nodes.get(i).getOperator());
+            System.out.println("State    : " + nodes.get(i).getState());
         }
         return s;
     }

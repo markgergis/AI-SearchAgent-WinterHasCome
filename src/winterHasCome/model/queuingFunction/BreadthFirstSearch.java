@@ -1,8 +1,10 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.queuingFunction;
 
 import java.util.LinkedList;
 
-public class BreadthFirstSearch extends QueueingFunction {
+import winterHasCome.model.searchTreeNode.SearchTreeNode;
+
+public class BreadthFirstSearch extends QueuingFunction {
 
 	public BreadthFirstSearch() {
 		super.queue = new LinkedList<SearchTreeNode>();

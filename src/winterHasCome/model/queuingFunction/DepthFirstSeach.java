@@ -1,8 +1,10 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.queuingFunction;
 
 import java.util.Stack;
 
-public class DepthFirstSeach extends QueueingFunction {
+import winterHasCome.model.searchTreeNode.SearchTreeNode;
+
+public class DepthFirstSeach extends QueuingFunction {
 
 	public DepthFirstSeach() {
 		super.queue = new Stack<SearchTreeNode>();

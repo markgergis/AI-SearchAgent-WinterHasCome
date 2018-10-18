@@ -1,29 +1,29 @@
-package WinterHasCome.model.searchAgent;
+package winterHasCome.model.queuingFunction;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public class UniformCostSearch extends QueueingFunction {
+import winterHasCome.model.searchTreeNode.SearchTreeNode;
+
+public class UniformCostSearch extends QueuingFunction {
 
 	public UniformCostSearch() {
 		super.queue = new PriorityQueue<SearchTreeNode>(new Comparator<SearchTreeNode>() {
 
-			@Override 
+			@Override
 			public int compare(SearchTreeNode o1, SearchTreeNode o2) {
-				if(o1.getPathCost() > o2.getPathCost()){
-		            return 1;
-		        }
-		        else if (o1.getPathCost() < o2.getPathCost()){
-		            return -1;
-		        }
-		        else{
-		            return 0;
-		        }
+				if (o1.getPathCost() > o2.getPathCost()) {
+					return 1;
+				} else if (o1.getPathCost() < o2.getPathCost()) {
+					return -1;
+				} else {
+					return 0;
+				}
 			}
-			
+
 		});
 	}
-	
+
 	@Override
 	public void add(SearchTreeNode s) {
 		((PriorityQueue<SearchTreeNode>) queue).add(s);
