@@ -1,6 +1,7 @@
 package winterHasCome.model.searchProblem;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -28,8 +29,16 @@ public class SaveWesteros extends SearchProblem {
 
 	public SaveWesteros() {
 		initialState = genGrid4x4();
+
+		System.out.println("[" + ((WesterosState) initialState).getWidth() + ","
+				+ ((WesterosState) initialState).getHeight() + "]");
+		// print the grid for visualization
+		System.out.println(((WesterosState) initialState).printGrid());
+		System.out.println("Grid generated");
 		operators = new Operator[5];
 
+//		operators[0] = new Attack(
+//				(((WesterosState) initialState).getWidth() * ((WesterosState) initialState).getHeight()));
 		operators[0] = new Attack(
 				3 * (((WesterosState) initialState).getWidth() + ((WesterosState) initialState).getHeight()));
 //		operators[0] = new Attack(8);
@@ -37,8 +46,14 @@ public class SaveWesteros extends SearchProblem {
 		operators[2] = new GoWest(1);
 		operators[3] = new GoSouth(1);
 		operators[4] = new GoEast(1);
-
 	}
+
+	@Override
+	public boolean goalTest(State state) {
+		return ((WesterosState) state).getEnemyCount() == 0;
+	}
+
+	/* Generating Grid */
 
 	private static int getRandomNumberInRange(int min, int max) {
 
@@ -52,8 +67,8 @@ public class SaveWesteros extends SearchProblem {
 
 	public WesterosState genGrid() {
 		Random rand = new Random();
-		int m = 5; // this is y = column
-		int n = 5; // this is x = row
+		int m = getRandomNumberInRange(4, 8); // this is y = column
+		int n = getRandomNumberInRange(4, 8); // this is x = row
 		CellType[][] grid = new CellType[m][n];
 		int dc = getRandomNumberInRange(m * n / 10, m * n / 4);
 		int wwc = dc;
@@ -94,15 +109,57 @@ public class SaveWesteros extends SearchProblem {
 				grid[i][j] = CellType.EMPTY;
 			}
 		}
-		System.out.println(n + " " + m);
-		// print the grid for visualization
+
+		Westerosgrid = grid;
+		return new WesterosState(grid, n, m, dragonStone, obstacles, whiteWalkers, dragonStoneLimit, 0, n - 1, m - 1,
+				wwc);
+	}
+
+	public WesterosState genGrid(int width, int height) {
+		Random rand = new Random();
+		int m = height; // this is y = column
+		int n = width; // this is x = row
+		CellType[][] grid = new CellType[m][n];
+		int dc = getRandomNumberInRange(m * n / 10, m * n / 4);
+		int wwc = dc;
+		int oc = getRandomNumberInRange(m * n / 10, m * n / 4);
+		HashSet<Cell> obstacles = new HashSet<Cell>(oc);
+		int dragonStoneLimit = rand.nextInt(m * n);
+		int x;
+		int y;
+		HashSet<Cell> whiteWalkers = new HashSet<>(dc);
+		do {
+			y = rand.nextInt(m);
+			x = rand.nextInt(n);
+		} while (x == n - 1 && y == m - 1);
+		grid[y][x] = CellType.DRAGONSTONE;
+		Cell dragonStone = new Cell(x, y);
+		grid[m - 1][n - 1] = CellType.EMPTY;
+		while (dc-- > 0) {
+			do {
+				y = rand.nextInt(m);
+				x = rand.nextInt(n);
+			} while (grid[y][x] != null);
+			grid[y][x] = CellType.WHITEWALKER;
+			whiteWalkers.add(new Cell(x, y));
+		}
+
+		while (oc-- > 0) {
+			do {
+				y = rand.nextInt(m);
+				x = rand.nextInt(n);
+			} while (grid[y][x] != null);
+			grid[y][x] = CellType.OBSTACLE;
+			obstacles.add(new Cell(x, y));
+		}
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[i].length; j++) {
-				System.out.print(grid[i][j]);
+				if ((grid[i][j] != null))
+					continue;
+				grid[i][j] = CellType.EMPTY;
 			}
-			System.out.println();
 		}
-		System.out.println("Grid generated");
+
 		Westerosgrid = grid;
 		return new WesterosState(grid, n, m, dragonStone, obstacles, whiteWalkers, dragonStoneLimit, 0, n - 1, m - 1,
 				wwc);
@@ -127,15 +184,7 @@ public class SaveWesteros extends SearchProblem {
 		grid[1][1] = grid[2][0] = CellType.WHITEWALKER;
 		whiteWalkers.add(new Cell(0, 2));
 		whiteWalkers.add(new Cell(1, 1));
-		System.out.println(n + " " + m);
-		// print the grid for visualization
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[i].length; j++) {
-				System.out.print(grid[i][j]);
-			}
-			System.out.println();
-		}
-		System.out.println("Grid generated");
+
 		Westerosgrid = grid;
 		return new WesterosState(grid, n, m, dragonStone, obstacles, whiteWalkers, dragonStoneLimit, 0, n - 1, m - 1,
 				wwc);
@@ -179,15 +228,6 @@ public class SaveWesteros extends SearchProblem {
 		obstacles.add(new Cell(5, 6));
 		obstacles.add(new Cell(7, 6));
 
-		System.out.println(n + " " + m);
-		// print the grid for visualization
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[i].length; j++) {
-				System.out.print(grid[i][j]);
-			}
-			System.out.println();
-		}
-		System.out.println("Grid generated");
 		Westerosgrid = grid;
 		return new WesterosState(grid, n, m, dragonStone, obstacles, whiteWalkers, dragonStoneLimit, 0, n - 1, m - 1,
 				wwc);
@@ -222,25 +262,12 @@ public class SaveWesteros extends SearchProblem {
 		obstacles.add(new Cell(2, 2));
 		obstacles.add(new Cell(4, 3));
 
-		System.out.println(n + " " + m);
-		// print the grid for visualization
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[i].length; j++) {
-				System.out.print(grid[i][j]);
-			}
-			System.out.println();
-		}
-		System.out.println("Grid generated");
 		Westerosgrid = grid;
 		return new WesterosState(grid, n, m, dragonStone, obstacles, whiteWalkers, dragonStoneLimit, 0, n - 1, m - 1,
 				wwc);
 	}
 
-	public static void main(String[] args) {
-		SaveWesteros s = new SaveWesteros();
-		s.search(s.Westerosgrid, "AS1", true);
-	}
-
+	/* Search */
 	public void search(CellType[][] grid, String strategy, boolean visualize) {
 		SearchTreeNode n = null;
 		switch (strategy) {
@@ -254,19 +281,19 @@ public class SaveWesteros extends SearchProblem {
 			n = search(new UniformCostSearch());
 			break;
 		case "ID":
-			n = search(new IterativeDeepeningSearch(Integer.MAX_VALUE, (WesterosState) initialState));
+			n = search(new IterativeDeepeningSearch(Integer.MAX_VALUE, initialState));
 			break;
 		case "GR1":
-			n = search(new GreedySearch(1));
+			n = search(new GreedySearch(this::optimalAttacks));
 			break;
 		case "GR2":
-			n = search(new GreedySearch(2));
+			n = search(new GreedySearch(this::manhattanFurthestAndAttack));
 			break;
 		case "AS1":
-			n = search(new AStarSearch(1));
+			n = search(new AStarSearch(this::optimalAttacks));
 			break;
 		case "AS2":
-			n = search(new AStarSearch(2));
+			n = search(new AStarSearch(this::manhattanFurthestAndAttack));
 			break;
 		default:
 			break;
@@ -279,16 +306,53 @@ public class SaveWesteros extends SearchProblem {
 				if (((Operator) pathFromRoot.get(j).getOperator()) != null)
 					System.out.println(((Operator) pathFromRoot.get(j).getOperator()).getName());
 				System.out.println(pathFromRootState.printGrid());
-				System.out.println("KING OF THE NORTH");
 			}
+			System.out.println("KING OF THE NORTH");
+
 		} else {
 			System.out.println("YOU KNOW NOTHING JON SNOW");
 		}
 
 	}
 
-	@Override
-	public boolean goalTest(State state) {
-		return ((WesterosState) state).getEnemyCount() == 0;
+	/* Heuristic Functions */
+
+	public int optimalAttacks(State state) {
+		// Where operators[0] is the Attack operator
+		return (int) (Math.ceil(((WesterosState) state).getEnemyCount() / 3.0)) * operators[0].getCost();
+	}
+
+	private int manhattanFurthestAndAttack(State state) {
+		// Where operators[0] is the Attack operator
+		// Where operators[1] is a movement operator and all movements cost the same
+		WesterosState westerosState = (WesterosState) state;
+		int estimate = 0;
+		if (westerosState.getEnemyCount() == 0) {
+			return 0;
+		}
+		Cell z = new Cell(westerosState.getJonX(), westerosState.getJonY());
+		if (westerosState.getDragonStoneCarried() == 0) {
+			estimate = (Math.abs(westerosState.getDragonStone().y - z.y)
+					+ Math.abs(westerosState.getDragonStone().x - z.x)) * operators[1].getCost();
+			z = westerosState.getDragonStone();
+		}
+		Iterator<Cell> i = westerosState.getWhiteWalkers().iterator();
+		int max = -1;
+		while (i.hasNext()) {
+			Cell c = i.next();
+			estimate += ((Math.abs(c.y - z.y) + Math.abs(c.x - z.x) - 1) * operators[1].getCost()
+					+ operators[0].getCost());
+			if (estimate > max) {
+				max = estimate;
+			}
+		}
+		return max;
+	}
+
+	/* Main */
+
+	public static void main(String[] args) {
+		SaveWesteros s = new SaveWesteros();
+		s.search(s.Westerosgrid, "AS1", true);
 	}
 }

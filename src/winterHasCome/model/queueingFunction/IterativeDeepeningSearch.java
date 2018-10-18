@@ -3,15 +3,15 @@ package winterHasCome.model.queueingFunction;
 import java.util.Stack;
 
 import winterHasCome.model.searchTreeNode.SearchTreeNode;
-import winterHasCome.model.state.WesterosState;
+import winterHasCome.model.state.State;
 
 public class IterativeDeepeningSearch extends QueueingFunction {
 
 	private int depth;
 	private int max;
-	WesterosState initialState;
+	State initialState;
 
-	public IterativeDeepeningSearch(int max, WesterosState initialState) {
+	public IterativeDeepeningSearch(int max, State initialState) {
 		super.queue = new Stack<SearchTreeNode>();
 		depth = 0;
 		this.max = max;
