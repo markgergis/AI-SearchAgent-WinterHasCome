@@ -12,13 +12,7 @@ public class UniformCostSearch extends QueuingFunction {
 
 			@Override
 			public int compare(SearchTreeNode o1, SearchTreeNode o2) {
-				if (o1.getPathCost() > o2.getPathCost()) {
-					return 1;
-				} else if (o1.getPathCost() < o2.getPathCost()) {
-					return -1;
-				} else {
-					return 0;
-				}
+				return Integer.compare(o1.getPathCost(), o2.getPathCost());
 			}
 
 		});

@@ -1,6 +1,7 @@
 package winterHasCome.model.operator;
 
 import java.util.HashSet;
+import java.util.function.BiFunction;
 
 import winterHasCome.model.cell.Cell;
 import winterHasCome.model.searchTreeNode.SearchTreeNode;
@@ -8,8 +9,8 @@ import winterHasCome.model.state.WesterosState;
 
 public class Attack extends Operator {
 
-	public Attack(int cost) {
-		super(cost, "Attack");
+	public Attack(int cost, BiFunction<SearchTreeNode, Operator, Integer> pathCostFunc) {
+		super(cost, "Attack", pathCostFunc);
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class Attack extends Operator {
 					state.getDragonStone(), state.getObstacles(), newEnemySet, state.getDragonStoneLimit(), carried,
 					state.getJonX(), state.getJonY(), state.getEnemyCount() - enemiesKilled);
 
-			return new SearchTreeNode(newState, node, this, this.getCost());
+			return new SearchTreeNode(newState, node, this);
 
 		}
 		return null;
