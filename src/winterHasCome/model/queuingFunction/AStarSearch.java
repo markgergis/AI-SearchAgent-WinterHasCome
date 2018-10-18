@@ -1,4 +1,4 @@
-package winterHasCome.model.queueingFunction;
+package winterHasCome.model.queuingFunction;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -8,17 +8,17 @@ import winterHasCome.model.searchTreeNode.SearchTreeNode;
 import winterHasCome.model.state.State;
 import winterHasCome.model.state.WesterosState;
 
-public class GreedySearch extends QueueingFunction {
+public class AStarSearch extends QueuingFunction {
 
-	public GreedySearch(Function<State, Integer> heuristicFunc) {
+	public AStarSearch(Function<State, Integer> heuristicFunc) {
 		super.queue = new PriorityQueue<SearchTreeNode>(new Comparator<SearchTreeNode>() {
 
 			@Override
 			public int compare(SearchTreeNode o1, SearchTreeNode o2) {
 				WesterosState node1S = (WesterosState) o1.getState();
 				WesterosState node2S = (WesterosState) o2.getState();
-				int distance_a = heuristicFunc.apply(node1S);
-				int distance_b = heuristicFunc.apply(node2S);
+				int distance_a = heuristicFunc.apply(node1S) + o1.getPathCost();
+				int distance_b = heuristicFunc.apply(node2S) + o2.getPathCost();
 
 				if (distance_a > distance_b)
 					return 1;

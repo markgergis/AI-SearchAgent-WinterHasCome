@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import winterHasCome.model.operator.Operator;
-import winterHasCome.model.queueingFunction.QueueingFunction;
+import winterHasCome.model.queuingFunction.QueuingFunction;
 import winterHasCome.model.searchTreeNode.SearchTreeNode;
 import winterHasCome.model.state.State;
 
@@ -15,7 +15,7 @@ public abstract class SearchProblem {
 
 	public abstract boolean goalTest(State state);
 
-	public SearchTreeNode search(QueueingFunction queuingFunc) {
+	public SearchTreeNode search(QueuingFunction queuingFunc) {
 		queuingFunc.add(new SearchTreeNode(initialState));
 		int i = 0;
 		while (true) {

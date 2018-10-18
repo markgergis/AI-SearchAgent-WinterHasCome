@@ -1,24 +1,30 @@
-package winterHasCome.model.queueingFunction;
+package winterHasCome.model.queuingFunction;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.function.Function;
 
 import winterHasCome.model.searchTreeNode.SearchTreeNode;
+import winterHasCome.model.state.State;
+import winterHasCome.model.state.WesterosState;
 
-public class UniformCostSearch extends QueueingFunction {
+public class GreedySearch extends QueuingFunction {
 
-	public UniformCostSearch() {
+	public GreedySearch(Function<State, Integer> heuristicFunc) {
 		super.queue = new PriorityQueue<SearchTreeNode>(new Comparator<SearchTreeNode>() {
 
 			@Override
 			public int compare(SearchTreeNode o1, SearchTreeNode o2) {
-				if (o1.getPathCost() > o2.getPathCost()) {
+				WesterosState node1S = (WesterosState) o1.getState();
+				WesterosState node2S = (WesterosState) o2.getState();
+				int distance_a = heuristicFunc.apply(node1S);
+				int distance_b = heuristicFunc.apply(node2S);
+
+				if (distance_a > distance_b)
 					return 1;
-				} else if (o1.getPathCost() < o2.getPathCost()) {
+				else if (distance_a < distance_b)
 					return -1;
-				} else {
-					return 0;
-				}
+				return 0;
 			}
 
 		});
@@ -38,5 +44,4 @@ public class UniformCostSearch extends QueueingFunction {
 	public boolean isEmpty() {
 		return queue.isEmpty();
 	}
-
 }

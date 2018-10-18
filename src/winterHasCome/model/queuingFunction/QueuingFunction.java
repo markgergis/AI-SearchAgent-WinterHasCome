@@ -1,10 +1,10 @@
-package winterHasCome.model.queueingFunction;
+package winterHasCome.model.queuingFunction;
 
 import java.util.Collection;
 
 import winterHasCome.model.searchTreeNode.SearchTreeNode;
 
-public abstract class QueueingFunction {
+public abstract class QueuingFunction {
 
 	Collection<SearchTreeNode> queue;
 

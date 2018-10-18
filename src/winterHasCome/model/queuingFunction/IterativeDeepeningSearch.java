@@ -1,11 +1,11 @@
-package winterHasCome.model.queueingFunction;
+package winterHasCome.model.queuingFunction;
 
 import java.util.Stack;
 
 import winterHasCome.model.searchTreeNode.SearchTreeNode;
 import winterHasCome.model.state.State;
 
-public class IterativeDeepeningSearch extends QueueingFunction {
+public class IterativeDeepeningSearch extends QueuingFunction {
 
 	private int depth;
 	private int max;
