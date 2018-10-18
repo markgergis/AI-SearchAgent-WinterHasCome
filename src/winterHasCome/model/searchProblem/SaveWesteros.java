@@ -307,6 +307,7 @@ public class SaveWesteros extends SearchProblem {
 					System.out.println(((Operator) pathFromRoot.get(j).getOperator()).getName());
 				System.out.println(pathFromRootState.printGrid());
 			}
+			System.out.println("Solution cost:" + pathFromRoot.get(pathFromRoot.size() - 1).getPathCost());
 			System.out.println("KING OF THE NORTH");
 
 		} else {
@@ -326,13 +327,13 @@ public class SaveWesteros extends SearchProblem {
 		// Where operators[0] is the Attack operator
 		// Where operators[1] is a movement operator and all movements cost the same
 		WesterosState westerosState = (WesterosState) state;
-		int estimate = 0;
+		int baseEstimate = 0;
 		if (westerosState.getEnemyCount() == 0) {
 			return 0;
 		}
 		Cell z = new Cell(westerosState.getJonX(), westerosState.getJonY());
 		if (westerosState.getDragonStoneCarried() == 0) {
-			estimate = (Math.abs(westerosState.getDragonStone().y - z.y)
+			baseEstimate = (Math.abs(westerosState.getDragonStone().y - z.y)
 					+ Math.abs(westerosState.getDragonStone().x - z.x)) * operators[1].getCost();
 			z = westerosState.getDragonStone();
 		}
@@ -340,13 +341,13 @@ public class SaveWesteros extends SearchProblem {
 		int max = -1;
 		while (i.hasNext()) {
 			Cell c = i.next();
-			estimate += ((Math.abs(c.y - z.y) + Math.abs(c.x - z.x) - 1) * operators[1].getCost()
-					+ operators[0].getCost());
+			int estimate = (Math.abs(c.y - z.y) + Math.abs(c.x - z.x) - 1) * operators[1].getCost()
+					+ operators[0].getCost();
 			if (estimate > max) {
 				max = estimate;
 			}
 		}
-		return max;
+		return max + baseEstimate;
 	}
 
 	/* Main */
