@@ -6,7 +6,6 @@ import java.util.function.Function;
 
 import winterHasCome.model.searchTreeNode.SearchTreeNode;
 import winterHasCome.model.state.State;
-import winterHasCome.model.state.WesterosState;
 
 public class GreedySearch extends QueuingFunction {
 
@@ -15,16 +14,12 @@ public class GreedySearch extends QueuingFunction {
 
 			@Override
 			public int compare(SearchTreeNode o1, SearchTreeNode o2) {
-				WesterosState node1S = (WesterosState) o1.getState();
-				WesterosState node2S = (WesterosState) o2.getState();
+				State node1S = o1.getState();
+				State node2S = o2.getState();
 				int distance_a = heuristicFunc.apply(node1S);
 				int distance_b = heuristicFunc.apply(node2S);
-
-				if (distance_a > distance_b)
-					return 1;
-				else if (distance_a < distance_b)
-					return -1;
-				return 0;
+				
+				return Integer.compare(distance_a, distance_b);
 			}
 
 		});
