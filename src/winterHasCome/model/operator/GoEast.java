@@ -14,10 +14,11 @@ public class GoEast extends Operator {
 	public SearchTreeNode apply(SearchTreeNode node) {
 		WesterosState state = ((WesterosState) node.getState());
 		Cell rightCell = new Cell(state.getJonX() + 1, state.getJonY());
-		if(node.getParent() != null) {
+		if (node.getParent() != null) {
 			WesterosState parentState = (WesterosState) node.getParent().getState();
 			Cell parentCell = new Cell(parentState.getJonX(), parentState.getJonY());
-			if(parentCell.equals(rightCell) &&!state.getDragonStone().equals(new Cell(state.getJonX() - 1, state.getJonY()))) {
+			if (parentCell.equals(rightCell)
+					&& !state.getDragonStone().equals(new Cell(state.getJonX() - 1, state.getJonY()))) {
 				return null;
 			}
 		}
