@@ -58,6 +58,46 @@ public class WesterosState extends State {
 		}
 		return ret;
 	}
+	
+	public String prologGrid() {
+		String ret = "";
+
+		ret += "/*---Grid-Repersentation---*/";
+		ret += "\n";
+		ret += "/*\n";
+		ret += printGrid();
+		ret += "*/\n";
+
+
+		ret += "/*---Knowledge-Base---*/";
+		ret += "\n";
+
+		ret += "jon_snow(" + jonX + "," + jonY + "," + dragonStoneCarried + ",s).";
+		ret += " /* X,Y,DragonGlass count, state*/";
+		ret += "\n";
+
+		ret += "dimensions(" + width + "," + height + ").";
+		ret += " /*Width,Height*/";
+		ret += "\n";
+
+		ret += "dragon_stone(" + dragonStone.x + "," + dragonStone.y + "," + dragonStoneLimit + ").";
+		ret += " /*X,Y,Count*/";
+		ret += "\n";
+
+		for (Cell obstacle : obstacles) {
+			ret += "obstacle(" + obstacle.x + "," + obstacle.y + ").";
+			ret += " /*X,Y*/";
+			ret += "\n";
+		}
+		
+		for (Cell whiteWalker : whiteWalkers) {
+			ret += "white_walker(" + whiteWalker.x + "," + whiteWalker.y + ",s).";
+			ret += " /*X,Y,state*/";
+			ret += "\n";
+		}
+
+		return ret;
+	}
 
 	public CellType[][] cloneGrid() {
 		CellType[][] newgrid = new CellType[grid.length][grid[0].length];

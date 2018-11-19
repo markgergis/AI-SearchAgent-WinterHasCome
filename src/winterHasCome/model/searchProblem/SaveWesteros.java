@@ -1,5 +1,7 @@
 package winterHasCome.model.searchProblem;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +30,7 @@ public class SaveWesteros extends SearchProblem {
 	CellType[][] Westerosgrid;
 
 	public SaveWesteros() {
-		initialState = genGrid4x4();
+		initialState = genGrid3x3();
 
 		System.out.println("[" + ((WesterosState) initialState).getWidth() + ","
 				+ ((WesterosState) initialState).getHeight() + "]");
@@ -170,6 +172,30 @@ public class SaveWesteros extends SearchProblem {
 		return new WesterosState(grid, n, m, dragonStone, obstacles, whiteWalkers, dragonStoneLimit, 0, n - 1, m - 1,
 				wwc);
 	}
+	
+	public WesterosState genGrid3x3() {
+		int m = 3; // this is y = column
+		int n = 3; // this is x = row
+		CellType[][] grid = new CellType[m][n];
+		int dc = 2;
+		int wwc = dc;
+		int oc = 1;
+		HashSet<Cell> obstacles = new HashSet<Cell>(oc);
+		int dragonStoneLimit = 2;
+		HashSet<Cell> whiteWalkers = new HashSet<>(dc);
+		grid[m - 1][n - 1] = CellType.EMPTY;
+		grid[0][1] = CellType.DRAGONSTONE;
+		Cell dragonStone = new Cell(1, 0);
+		grid[0][0] = grid[0][2] = grid[1][2] = grid[2][0] = grid[2][1] = CellType.EMPTY;
+		grid[1][1] = CellType.OBSTACLE;
+		obstacles.add(new Cell(1, 1));
+		grid[1][0] = CellType.WHITEWALKER;
+		whiteWalkers.add(new Cell(0, 1));
+
+		Westerosgrid = grid;
+		return new WesterosState(grid, n, m, dragonStone, obstacles, whiteWalkers, dragonStoneLimit, 0, n - 1, m - 1,
+				wwc);
+	}
 
 	public WesterosState genGrid4x4() {
 		int m = 4; // this is y = column
@@ -196,49 +222,7 @@ public class SaveWesteros extends SearchProblem {
 				wwc);
 	}
 
-	public WesterosState genGrid8x8() {
-		int m = 8; // this is y = column
-		int n = 8; // this is x = row
-		CellType[][] grid = new CellType[m][n];
-		int dc = 8;
-		int wwc = dc;
-		int oc = 10;
-		HashSet<Cell> obstacles = new HashSet<Cell>(oc);
-		int dragonStoneLimit = 10;
-		HashSet<Cell> whiteWalkers = new HashSet<>(dc);
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[i].length; j++) {
-				grid[i][j] = CellType.EMPTY;
-			}
-		}
-		grid[7][4] = CellType.DRAGONSTONE;
-		Cell dragonStone = new Cell(4, 7);
-		grid[1][6] = grid[1][7] = grid[2][5] = grid[3][2] = grid[3][6] = grid[4][0] = grid[4][6] = grid[5][2] = CellType.WHITEWALKER;
-		whiteWalkers.add(new Cell(6, 1));
-		whiteWalkers.add(new Cell(7, 1));
-		whiteWalkers.add(new Cell(5, 2));
-		whiteWalkers.add(new Cell(2, 3));
-		whiteWalkers.add(new Cell(6, 3));
-		whiteWalkers.add(new Cell(0, 4));
-		whiteWalkers.add(new Cell(6, 4));
-		whiteWalkers.add(new Cell(2, 5));
-		grid[2][1] = grid[3][0] = grid[3][5] = grid[3][7] = grid[4][7] = grid[5][0] = grid[6][0] = grid[6][1] = grid[6][5] = grid[6][7] = CellType.OBSTACLE;
-		obstacles.add(new Cell(1, 2));
-		obstacles.add(new Cell(0, 3));
-		obstacles.add(new Cell(5, 3));
-		obstacles.add(new Cell(7, 3));
-		obstacles.add(new Cell(7, 4));
-		obstacles.add(new Cell(0, 5));
-		obstacles.add(new Cell(0, 6));
-		obstacles.add(new Cell(1, 6));
-		obstacles.add(new Cell(5, 6));
-		obstacles.add(new Cell(7, 6));
-
-		Westerosgrid = grid;
-		return new WesterosState(grid, n, m, dragonStone, obstacles, whiteWalkers, dragonStoneLimit, 0, n - 1, m - 1,
-				wwc);
-	}
-
+	
 	public WesterosState genGrid5x5() {
 		int m = 5; // this is y = column
 		int n = 5; // this is x = row
@@ -321,6 +305,50 @@ public class SaveWesteros extends SearchProblem {
 		}
 
 	}
+	
+	public WesterosState genGrid8x8() {
+		int m = 8; // this is y = column
+		int n = 8; // this is x = row
+		CellType[][] grid = new CellType[m][n];
+		int dc = 8;
+		int wwc = dc;
+		int oc = 10;
+		HashSet<Cell> obstacles = new HashSet<Cell>(oc);
+		int dragonStoneLimit = 10;
+		HashSet<Cell> whiteWalkers = new HashSet<>(dc);
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				grid[i][j] = CellType.EMPTY;
+			}
+		}
+		grid[7][4] = CellType.DRAGONSTONE;
+		Cell dragonStone = new Cell(4, 7);
+		grid[1][6] = grid[1][7] = grid[2][5] = grid[3][2] = grid[3][6] = grid[4][0] = grid[4][6] = grid[5][2] = CellType.WHITEWALKER;
+		whiteWalkers.add(new Cell(6, 1));
+		whiteWalkers.add(new Cell(7, 1));
+		whiteWalkers.add(new Cell(5, 2));
+		whiteWalkers.add(new Cell(2, 3));
+		whiteWalkers.add(new Cell(6, 3));
+		whiteWalkers.add(new Cell(0, 4));
+		whiteWalkers.add(new Cell(6, 4));
+		whiteWalkers.add(new Cell(2, 5));
+		grid[2][1] = grid[3][0] = grid[3][5] = grid[3][7] = grid[4][7] = grid[5][0] = grid[6][0] = grid[6][1] = grid[6][5] = grid[6][7] = CellType.OBSTACLE;
+		obstacles.add(new Cell(1, 2));
+		obstacles.add(new Cell(0, 3));
+		obstacles.add(new Cell(5, 3));
+		obstacles.add(new Cell(7, 3));
+		obstacles.add(new Cell(7, 4));
+		obstacles.add(new Cell(0, 5));
+		obstacles.add(new Cell(0, 6));
+		obstacles.add(new Cell(1, 6));
+		obstacles.add(new Cell(5, 6));
+		obstacles.add(new Cell(7, 6));
+
+		Westerosgrid = grid;
+		return new WesterosState(grid, n, m, dragonStone, obstacles, whiteWalkers, dragonStoneLimit, 0, n - 1, m - 1,
+				wwc);
+	}
+
 
 	/* Heuristic Functions */
 
@@ -358,8 +386,10 @@ public class SaveWesteros extends SearchProblem {
 
 	/* Main */
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		SaveWesteros s = new SaveWesteros();
-		s.search(s.Westerosgrid, "AS1", true);
+		PrintWriter writer = new PrintWriter("KB.pl", "UTF-8");
+		writer.print(((WesterosState) s.initialState).prologGrid());
+		writer.close();
 	}
 }
