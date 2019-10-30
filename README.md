@@ -105,3 +105,5 @@ If the agent does not have any Dragon Glass, then the estimate is equal to the M
 If the enemy count is equal to zero, the heuristic function estimates the cost to be zero.
 
 This heuristic is admissible as it only cares about the last enemy, so it definitely underestimates when there's more than one enemy. And in the case of one enemy, it either exactly estimates the cost needed to kill it, or underestimates it if there are obstacles in the way to it, so the movement cost would be greater than the Manhattan distance.
+***
+Done as a part of Artificial Intelligence course.
